@@ -1,60 +1,94 @@
-import "./App.css"
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [currentOp, bIDMAS] = useState("+");
+
+  const [buttonNum, selectedNum] = useState(0);
+
+  const [buttonNum2, selectedNum2] = useState(0);
+
+  const [currentAnswer, finalSum] = useState(0);
+
+  const calculation = () => {
+    let sum = 0;
+    if (currentOp === "+") {
+      sum = buttonNum + buttonNum2;
+    } else if (currentOp === "-") {
+      sum = buttonNum - buttonNum2;
+    } else if (currentOp === "*") {
+      sum = buttonNum * buttonNum2;
+    } else if (currentOp === "÷") {
+      if (buttonNum2 === 0) {
+        sum = "error";
+      } else {
+        sum = buttonNum / buttonNum2;
+      }
+    } else {
+      sum = "0";
+    }
+    finalSum(sum);
+  };
 
   return (
     <div className="calculator">
+      {/* First Number */}
+
       <div className="panel">
-        <p>0</p>
+        <p className="numbers">{buttonNum}</p>
         <div className="numbers">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>0</button>
-          <button>Clear</button>
+          <button onClick={() => selectedNum(1)}>1</button>
+          <button onClick={() => selectedNum(2)}>2</button>
+          <button onClick={() => selectedNum(3)}>3</button>
+          <button onClick={() => selectedNum(4)}>4</button>
+          <button onClick={() => selectedNum(5)}>5</button>
+          <button onClick={() => selectedNum(6)}>6</button>
+          <button onClick={() => selectedNum(7)}>7</button>
+          <button onClick={() => selectedNum(8)}>8</button>
+          <button onClick={() => selectedNum(9)}>9</button>
+          <button onClick={() => selectedNum(0)}>0</button>
+          <button onClick={() => selectedNum(0)}>Clear</button>
+        </div>
+      </div>
+      {/* Operators */}
+      <div className="panel">
+        <p className="bidmastools">{currentOp}</p>
+        <div className="numbers">
+          <button onClick={() => bIDMAS("+")}>+</button>
+          <button onClick={() => bIDMAS("-")}>-</button>
+          <button onClick={() => bIDMAS("*")}>*</button>
+          <button onClick={() => bIDMAS("÷")}>÷</button>
         </div>
       </div>
 
+      {/* Second Number */}
+
       <div className="panel">
-        <p>+</p>
+        <p className="numbers">{buttonNum2}</p>
         <div className="numbers">
-          <button>+</button>
-          <button>-</button>
-          <button>*</button>
-          <button>÷</button>
+          <button onClick={() => selectedNum2(1)}>1</button>
+          <button onClick={() => selectedNum2(2)}>2</button>
+          <button onClick={() => selectedNum2(3)}>3</button>
+          <button onClick={() => selectedNum2(4)}>4</button>
+          <button onClick={() => selectedNum2(5)}>5</button>
+          <button onClick={() => selectedNum2(6)}>6</button>
+          <button onClick={() => selectedNum2(7)}>7</button>
+          <button onClick={() => selectedNum2(8)}>8</button>
+          <button onClick={() => selectedNum2(9)}>9</button>
+          <button onClick={() => selectedNum2(0)}>0</button>
+          <button onClick={() => selectedNum2(0)}>Clear</button>
         </div>
       </div>
 
-      <div className="panel">
-        <p>0</p>
-        <div className="numbers">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>0</button>
-          <button>Clear</button>
-        </div>
-      </div>
+      {/* Answer */}
+
       <div className="panel answer">
-        <p>0</p>
+        <p>{currentAnswer}</p>
         <div>
-          <button>=</button>
+          <button onClick={calculation}>=</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default App
+export default App;
